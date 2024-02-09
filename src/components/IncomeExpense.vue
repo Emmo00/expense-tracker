@@ -15,8 +15,8 @@
 import { defineProps } from 'vue';
 
 const props = defineProps({
-    income: { type: Number, required: true },
-    expense: { type: Number, required: true }
+    income: { type: String, required: true },
+    expense: { type: String, required: true }
 })
 
 </script>

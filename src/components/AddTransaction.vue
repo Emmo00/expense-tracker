@@ -17,6 +17,8 @@
 <script setup>
 import { ref, defineProps } from 'vue';
 
+const emit = defineEmits(['transactionAdded'])
+
 const transactionName = ref("")
 const transactionAmount = ref("")
 const props = defineProps({
@@ -24,8 +26,12 @@ const props = defineProps({
 })
 
 function addTransaction() {
-    const randomNumber = Math.floor(Math.random() * 100)
-    props.transactions.push({ id: randomNumber, text: transactionName.value, amount: Number(transactionAmount.value) })
+    const transaction = {
+        name: transactionName.value,
+        amount: Number(transactionAmount.value)
+    }
+    console.log("transaction added", transaction)
+    emit('transactionAdded', transaction)
     transactionName.value = ''
     transactionAmount.value = ''
 }
