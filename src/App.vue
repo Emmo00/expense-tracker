@@ -6,7 +6,8 @@
                 {{ total }}
             </Balance>
             <IncomeExpense :income="totalIncome.toFixed(2)" :expense="totalExpense.toFixed(2)" />
-            <TransactionList :transactions="transactions" @transactionDeleted="deleteTransaction" />
+            <TransactionList :transactions="transactions" @transactionDeleted="deleteTransaction"
+                @clearTransactions="clearTransactions" />
         </div>
         <AddTransaction :transactions="transactions" @transactionAdded="addTransaction" />
     </div>
@@ -46,6 +47,11 @@ function addTransaction({ name, amount }) {
 
 function deleteTransaction(id) {
     transactions.value = transactions.value.filter(transaction => transaction.id !== id)
+    updateLocalStorage()
+}
+
+function clearTransactions() {
+    transactions.value = []
     updateLocalStorage()
 }
 

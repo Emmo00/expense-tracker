@@ -1,5 +1,8 @@
 <template>
-    <h3>History</h3>
+    <div class="history-header">
+        <h3>History</h3>
+        <button class="clear btn" @click="clearTransactions">Clear all</button>
+    </div>
     <ul id="list" class="list">
         <li :class="transaction.amount < 0 ? 'minus' : 'plus'" v-for="transaction in transactions" :key="transaction.id">
             {{ transaction.name }} <span>{{ transaction.amount }}</span><button class="delete-btn"
@@ -11,11 +14,15 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const emit = defineEmits(['transactionDeleted'])
+const emit = defineEmits(['transactionDeleted', 'clearTransactions'])
 const props = defineProps({ transactions: { type: Array, required: true } })
 
 function deleteTransaction(id) {
     emit('transactionDeleted', id)
+}
+
+function clearTransactions() {
+    emit('clearTransactions')
 }
 
 </script>
